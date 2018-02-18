@@ -7,25 +7,28 @@
     <meta charset="UTF-8"/>
     <title>Edit pregnancy</title>
 </head>
-<body>
-
+<body class="container">
+<div>
+    <h3> Pregnancy editing page </h3>
+</div>
 <div class="table-responsive">
     <table class="table table-sm">
-        <thead>
+        <thead class="thead-inverse">
         <tr>
-            <th>ID</th>
-            <th>статус</th>
-            <th>начало</th>
-            <th>конец</th>
+            <th class="col-md-1">ID</th>
+            <th class="col-md-2">статус</th>
+            <th class="col-md-2">начало</th>
+            <th class="col-md-2">конец</th>
+            <th class="col-md-1">действие</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td></td>
+            <th></th>
 
             <form action="#" method="POST" th:action="@{/patient/__${patient.id}__/pregnancy/__${pregnancy.id}__/edit}"
                   th:object="${pregnancy}">
-                <th>
+                <th class="col-md-2">
                     <select class="form-control" th:field="*{status}">
                         <option th:value="${pregnancy.status}"></option>
                         <option th:each="status : ${statuses}"
@@ -35,20 +38,21 @@
                                 name="selectOption"></option>
                     </select>
                 </th>
-                <th>
+                <th class="col-md-2">
                     <div class="input-group input-append date" id="datePickerStartTime">
                         <input type="text" class="form-control"
                                required="required" th:value="${pregnancy.start_time}" name="startTime" /> <span class="input-group-addon add-on"><span
                             class="glyphicon glyphicon-calendar"></span></span>
                     </div>
-                </th><th><div class="input-group input-append date" id="datePickerEndTime">
+                </th>
+                <th class="col-md-2">
+                    <div class="input-group input-append date" id="datePickerEndTime">
                     <input type="text" class="form-control"
                            required="required" th:value="${pregnancy.end_time}" name="endTime"/> <span class="input-group-addon add-on"><span
                         class="glyphicon glyphicon-calendar"></span></span>
                 </div>
                 </th>
-
-                <th>
+                <th class="col-md-1">
                     <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
                     </button>
                 </th>
@@ -56,10 +60,12 @@
         </tr>
         </tbody>
     </table>
-    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="/webjars/bootstrap-datepicker/1.0.1/js/bootstrap-datepicker.js"></script>
+
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"/>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"/>
+    <script src="/webjars/bootstrap-datepicker/1.0.1/js/bootstrap-datepicker.js"/>
     <script type="text/javascript" th:src="@{/js/jquery.tablesorter.js}" />
+
     <script>
         $(document).ready(function(){
             $('#datePickerStartTime').datepicker({
