@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link type="text/css" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet"/>
+    <link type="text/css" href="/webjars/bootstrap-datepicker/1.0.1/css/datepicker.css"
+          rel="stylesheet"/>
+    <meta charset="UTF-8"/>
+    <title>View Patients</title>
+</head>
+<body>
+
+<h2>Пациент: </h2> <p class="text-info" th:text="${patient.full_name}"></p>
+<div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th class="col-md-1">ID</th>
+            <th class="col-md-2">статус</th>
+            <th class="col-md-2">начало</th>
+            <th class="col-md-2">конец</th>
+            <th class="col-md-1">действие</th>
+        </tr>
+
+        <tr>
+            <td >
+            </td>
+
+            <form action="#" method="POST" th:action="@{/patient/__${patient.id}__/add/pregnancy}"
+                  th:object="${pregnancy}">
+                <th>
+                    <select class="form-control" th:field="*{status}">
+                        <option value="0"></option>
+                        <option th:each="status : ${statuses}"
+                                th:value="${status}"
+                                th:text="${status}"
+                                th:selected="${status}"
+                                name="selectOption"></option>
+                    </select>
+                </th>
+               <th>
+                   <div class="input-group input-append date" id="datePickerStartTime">
+                       <input type="text" class="form-control"
+                              required="required" th:value="${pregnancy.start_time}" name="startTime" /> <span class="input-group-addon add-on"><span
+                           class="glyphicon glyphicon-calendar"></span></span>
+                   </div>
+               </th>
+                <th><div class="input-group input-append date" id="datePickerEndTime">
+                    <input type="text" class="form-control"
+                           required="required" th:value="${pregnancy.end_time}" name="endTime"/> <span class="input-group-addon add-on"><span
+                        class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                </th>
+
+                <th th:if="${#lists.contains(pregnancyStatuses, 'active')}">
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span>
+                    </button>
+                </th>
+            </form>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pregnancy : ${pregnanciesList}">
+            <td th:field="${pregnancy.id}" th:text="${pregnancy.id}"/>
+            <td th:field="${pregnancy.status}" th:text="${pregnancy.status}"/>
+            <td th:field="${pregnancy.start_time}" th:text="${pregnancy.start_time}"/>
+            <td th:field="${pregnancy.end_time}" th:text="${pregnancy.end_time}"/>
+            <form method="POST"
+                  th:object="${pregnancy}" th:action="@{/patient/__${patient.id}__/pregnancy/__${pregnancy.id}__/view}">
+                <td th:switch="${pregnancy.status}">
+                    <button th:case="'active'"  type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span></button>
+                </td>
+            </form>
+            <form method="POST" th:action="@{/patient/__${patient.id}__/pregnancy/__${pregnancy.id}__/delete}" th:object="${pregnancy}">
+                <td>
+                    <button class="btn btn-danger" type="submit"><span class="glyphicon glyphicon-minus-sign"></span>
+                    </button>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/webjars/bootstrap-datepicker/1.0.1/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" th:src="@{/js/jquery.tablesorter.js}"/>
+<script>
+    $(document).ready(function(){
+        $('#datePickerStartTime').datepicker({
+            format : 'dd-mm-yyyy'
+        });
+        $('#datePickerEndTime').datepicker({
+            format : 'dd-mm-yyyy'
+        });
+    })
+</script>
+</body>
+
+</html>

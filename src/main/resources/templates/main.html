@@ -1,0 +1,43 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link type="text/css" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet"/>
+ <meta charset="UTF-8"/>
+    <title>Pregnancy Application</title>
+</head>
+<body>
+
+<div class="table-responsive">
+    <table class="table table-sm tablesorter">
+    <thead>
+    <tr>
+        <th class="col-md-1">ID<span class="glyphicon glyphicon-sort"></span></th>
+        <th class="col-md-3">ФИО<span class="glyphicon glyphicon-sort"></span></th>
+        <th class="col-md-2">ИИН<span class="glyphicon glyphicon-sort"></span></th>
+        <th  class="col-md-2">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="patient : ${patientList}">
+        <td  class="col-md-1" th:text="${patient.id}" th:field="*{id}">N/A</td>
+        <td  class="col-md-3" th:text="${patient.full_name}" th:field="*{full_name}">N/A</td>
+        <td   class="col-md-2" th:text="${patient.iin}" th:field="*{iin}">N/A</td>
+            <form method="GET" th:action="@{patient/__${patient.id}__/pregnancies}" th:object="${patient}">
+                <td  class="col-md-2"><button class="btn  btn-info" type="submit" name="view"><span class="glyphicon glyphicon-file"></span>Подробнее</button></td>
+            </form>
+    </tr>
+    </tbody>
+    </table>
+<script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" th:src="@{/js/jquery.tablesorter.js}" />
+    <script>
+        $(document).ready(function() {
+            $("table").tablesorter({
+                sortList: [[0,0],[2,0]]
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

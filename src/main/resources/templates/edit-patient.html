@@ -1,0 +1,75 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link type="text/css" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet"/>
+    <link type="text/css" href="/webjars/bootstrap-datepicker/1.0.1/css/datepicker.css"
+          rel="stylesheet"/>
+    <meta charset="UTF-8"/>
+    <title>Edit pregnancy</title>
+</head>
+<body>
+
+<div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>статус</th>
+            <th>начало</th>
+            <th>конец</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td></td>
+
+            <form action="#" method="POST" th:action="@{/patient/__${patient.id}__/pregnancy/__${pregnancy.id}__/edit}"
+                  th:object="${pregnancy}">
+                <th>
+                    <select class="form-control" th:field="*{status}">
+                        <option th:value="${pregnancy.status}"></option>
+                        <option th:each="status : ${statuses}"
+                                th:value="${status}"
+                                th:text="${status}"
+                                th:selected="${status}"
+                                name="selectOption"></option>
+                    </select>
+                </th>
+                <th>
+                    <div class="input-group input-append date" id="datePickerStartTime">
+                        <input type="text" class="form-control"
+                               required="required" th:value="${pregnancy.start_time}" name="startTime" /> <span class="input-group-addon add-on"><span
+                            class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                </th><th><div class="input-group input-append date" id="datePickerEndTime">
+                    <input type="text" class="form-control"
+                           required="required" th:value="${pregnancy.end_time}" name="endTime"/> <span class="input-group-addon add-on"><span
+                        class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                </th>
+
+                <th>
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>
+                    </button>
+                </th>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+    <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/webjars/bootstrap-datepicker/1.0.1/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.tablesorter.js}" />
+    <script>
+        $(document).ready(function(){
+            $('#datePickerStartTime').datepicker({
+                format : 'dd-mm-yyyy'
+            });
+            $('#datePickerEndTime').datepicker({
+                format : 'dd-mm-yyyy'
+            });
+        })
+    </script>
+</div>
+</body>
+</html>
