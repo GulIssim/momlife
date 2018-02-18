@@ -15,7 +15,7 @@ DEMO App for tracking and editing pregnancy of patients
 
 REST API:
 
-- "/" - get all patient list 
+- "/" - get all patients list 
 - "patient/{patient_id}/pregnancies" - all pregnancies of patient with id = patient_id
 - "patient/{patient_id}/add/pregnancy" - adding pregnancy to patient with id = patient_id. 
                                        if patient has pregnancy with status = 'active', patient cannot add pregnancy   
