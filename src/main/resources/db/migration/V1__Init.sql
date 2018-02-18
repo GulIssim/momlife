@@ -14,6 +14,3 @@ CREATE TABLE pregnancy (
   FOREIGN KEY (patient_id)
   REFERENCES public.patient(id));
 
-INSERT INTO patient VALUES (1, '123456789123', 'Sit Amet'), (2, '789456123789', 'Lorem Ipsum');
-INSERT INTO pregnancy VALUES (1, 'active', 1, '17-09-2012','17-6-2013'), (2,'success',2, '20-02-2015', '18-11-2015');
-
