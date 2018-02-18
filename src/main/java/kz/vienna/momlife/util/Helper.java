@@ -1,5 +1,7 @@
 package kz.vienna.momlife.util;
 
+import kz.vienna.momlife.model.entity.Pregnancy;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -9,14 +11,14 @@ public final class Helper {
 
     public static List getStatuses(){
         List<PregnancyStatus> list = Arrays.asList(PregnancyStatus.values());
-        System.out.println(list);
         return list;
     }
 
     public static List getPregnanciesStatuses(List pregnancies){
         List<String> statuses = new ArrayList();
-        for (Iterator<String> i = pregnancies.iterator(); i.hasNext();) {
-            String status = i.next();
+        for (Iterator<Pregnancy> i = pregnancies.iterator(); i.hasNext();) {
+            Pregnancy pregnancy = i.next();
+            String status = pregnancy.getStatus();
             statuses.add(status);
         }
         return statuses;
